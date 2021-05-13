@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>在线选课系统</title>
+<!--    <script src="js/jquery-3.4.1.min.js"></script>-->
+    <link rel="stylesheet" type="text/css" href="layui/css/layui.css" >
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="bootstrap.css">
+
+    <style>
+        .layui-layout-admin .layui-body{
+            bottom:0px;
+        }
+        .layui-table-grid-down {
+            display: none;
+        }
+        .layui-table-cell {
+            font-size:14px;
+            padding:0 5px;
+            height:auto;
+            overflow:visible;
+            text-overflow:inherit;
+            white-space:normal;
+            word-break: break-all;
+        }
+    </style>
+</head>
+
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo" style="color: #fff"><a href=""><img src="layui/images/face/1.gif" class="layui-nav-img"></a>在线选课系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <ul class="layui-nav">
+                <li class="layui-nav-item">
+                    <a href=""><img src="layui/images/face/2.gif" class="layui-nav-img">Admin</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">修改信息</a></dd>
+                        <dd><a href="javascript:;">退出</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">个人中心<span class="layui-badge-dot"></span></a>
+                </li>
+            </ul>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black" >
+        <div class="layui-side-scroll" >
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree "lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">管理员权限</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;">学生管理</a>
+                            <ol class="layui-nav-child">
+                                <li><a href="javascript:;">添加学生</a></li>
+                                <li><a href="javascript:;">删除学生</a></li>
+                                <li><a href="javascript:;">修改学生</a></li>
+                                <li><a href="javascript:;">查询学生</a></li>
+                            </ol>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;">教师管理</a>
+                            <ol class="layui-nav-child">
+                                <li><a href="javascript:;">添加教师</a></li>
+                                <li><a href="javascript:;">删除教师</a></li>
+                                <li><a href="javascript:;">修改教师</a></li>
+                                <li><a href="javascript:;">查询教师</a></li>
+                            </ol>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;">课程管理</a>
+                            <ol class="layui-nav-child">
+                                <li><a href="javascript:;">添加课程</a></li>
+                                <li><a href="javascript:;">删除课程</a></li>
+                                <li><a href="javascript:;">修改课程</a></li>
+                                <li><a href="javascript:;">查询课程</a></li>
+                            </ol>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">教师权限</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;">查看选课学生</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;">查看统计</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">学生权限</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;">查询可选课程</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;">查询已选课程</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+</div>
+</body>
+
+
+<script>
+    layui.use(['table',  'form','laydate','util','element'], function(){
+
+        var table = layui.table;
+        var laydate = layui.laydate;
+        var form = layui.form;
+        var util=layui.util;
+
+        var tableIns=table.render({
+            //对象表格的id
+            elem: '#saledTable'
+            ,method: 'POST'
+            //头部工具栏
+            ,toolbar: '#toolbarDemo'
+            // ,height: "full-205"
+            // ,url: '/shop/admin/orderaftersale/select' //数据接口
+            ,page: true //开启分页
+            ,data: [{id: 20191207123, user: "张全蛋<br>13143032326", date: "2020年1月1日", type:"退货退款",state: "待处理", amount: 1000.35, reason: "拍错怕实打实打算大苏打飒飒打撒",},
+                {id: 20200117007,user: "诸葛大力<br>77880341226", date: "2019年1月1日", type:"仅退款", state: "已处理", amount: 123.35, reason: "拍错怕实打实打算大苏打飒飒打撒",}
+            ]
+            ,cols: [[ //表头
+                {type: 'checkbox'}
+                ,{field: 'id', title: '账号', width:140, sort: true,align:'center'}
+                ,{field: 'user', title: '所属门店', width:100,align:'center'}
+                ,{field: 'date', title: '日期', width:100,align:'center'}
+                ,{field: 'operate', title: '操作', toolbar: '#barDemo',align:'center'}
+            ]]
+            ,done: function(res, curr, count){
+                if(res.code === -1){
+                    layer.msg("请先登录再操作...");
+                    setTimeout(()=>{
+                        window.location.href = "/dev/index.html";
+                    }, 1200);
+                    return;
+                }
+                console.log(res);
+            }
+        });
+
+    });
+</script>
